@@ -9,33 +9,37 @@ import './App.css'
 
 function App() {
   const [loading, setLoading] = useState(false)
+  const [account, setAccount] = useState('')
+  const [error, setError] = useState('')
 
-  const loadWeb3 = async () => {
+  const loadBlockchainData = async () => {
     if (window.ethereum) {
-      window.web3 = new Web3(window.ethereum)
-      await window.ethereum.enable()
-    } else if (window.web3) {
-      window.web3 = new Web3(window.web3.currentProvider)
-    } else {
-      window.alert('Non-Ethereum browser. Please install MetaMask.')
+      try {
+        const accounts = await window.ethereum.request({
+          method: 'eth_requestAccounts',
+        })
+        setAccount(accounts[0])
+      } catch (error) {
+        if (error.code === 4001) {
+          // User rejected request
+        }
+
+        // if not pending then something else wrong
+        if (error.code !== -32002) {
+          setError(error)
+          alert(error.message)
+        }
+      }
     }
   }
 
-  const loadBlockChainData = async () => {
-    const web3 = window.web3
-
-    const accounts = await web3.eth.getAccounts()
-    console.log(accounts[0])
-  }
-
   useEffect(() => {
-    loadWeb3()
-    loadBlockChainData()
+    loadBlockchainData()
   }, [])
 
   return (
     <div className="App" style={{ height: '100vh' }}>
-      <Navbar />
+      <Navbar account={account} />
       <Container className="py-3">
         {loading ? <Loader /> : <main>Edit App.js to start working</main>}
       </Container>

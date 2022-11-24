@@ -5,7 +5,6 @@ import Jazzicon, { jsNumberForAddress } from 'react-jazzicon'
 import BsNavbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
 import Container from 'react-bootstrap/Container'
-import Row from 'react-bootstrap/Row'
 
 const Navbar = ({ account }) => {
   return (
