@@ -21,6 +21,12 @@ This project is being done according to [a tutorial by dapp university](https://
 3. **Ganache.** Personal blockchain for testing.
 4. **Metamask.** Since browser do not directly connect to the blockchain, we use this to extend the browser.
 
+## Architecture of Decentagram
+
+- The use interacts using a web application and a crypto wallet.
+- The crypto wallet sends and gets data to the etherium blockchain.
+- The images are stored in the IPFS.
+
 ## Initial Setup
 
 1. `npx create-react-app .`
@@ -39,19 +45,25 @@ This project is being done according to [a tutorial by dapp university](https://
 
 ## Testing if truffle is setup
 
-1. Create a new contract _Decentagram.sol_ in _contracts_ directory. 
-2. Create a _2\_deploy\_contracts.js_ in _migrations_
+1. Create a new contract _Decentagram.sol_ in _contracts_ directory.
+2. Create a _2_deploy_contracts.js_ in _migrations_
 3. Launch Ganache
-5. $ `truffle console`
-4. \> `migrate --reset`
-5. \> `decentagram = await Decentagram.deployed()`. This should show the contract details in a JSON. 
+4. $ `truffle console`
+5. \> `migrate --reset`
+6. \> `decentagram = await Decentagram.deployed()`. This should show the contract details in a JSON.
 7. \> `await decentagram.address` returns the address of the contract
 
-## Creating a test
+## Testing a contract
 
 1. Add _test.js_ in _test_
 2. $ `truffle console`
 3. \> `test`
 
+- Testing is important.
+- Contracts are immuatble once deployed.
 
+## Events
+
+* This let's us know that something happened
+* We can subscribe to events externally in the application
 
