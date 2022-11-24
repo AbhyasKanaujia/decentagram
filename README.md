@@ -32,4 +32,4 @@ This project is being done according to [a tutorial by dapp university](https://
     3. `npm i ipfs-http-client`
     4. `npm i truffle web3`
     5. `npm i -D gh-pages`
-
+5. Add _Migration.sol_ and _1\_initial\_migration.js_
