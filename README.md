@@ -1,5 +1,7 @@
 # Decentagram
 
+This project is being done according to [a tutorial by dapp university](https://www.youtube.com/watch?v=8rhueOcTu8k)
+
 ## Instagram
 
 - Instagram has a single web sever that hosts all the files.
@@ -24,3 +26,10 @@
 1. `npx create-react-app .`
 2. `truffle init`
 3. Configure _truffle-config.js_
+4. Install required packages: 
+    1. `npm i bootstrap react-bootstrap identicon.js`
+    2. `npm i chai chai-as-promised chai-bignumber`
+    3. `npm i ipfs-http-client`
+    4. `npm i truffle web3`
+    5. `npm i -D gh-pages`
+
