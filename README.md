@@ -34,3 +34,4 @@ This project is being done according to [a tutorial by dapp university](https://
    5. `npm i -D gh-pages`
 5. Add _Migration.sol_ and _1_initial_migration.js_
 6. Cleanup unnecessary files from react project
+7. Add Navbar component
