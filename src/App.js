@@ -3,37 +3,56 @@ import Web3 from 'web3'
 
 import { Navbar, Loader } from './components'
 
+import Decentagram from './abis/Decentagram.json'
+
 import Container from 'react-bootstrap/Container'
 
 import './App.css'
 
 function App() {
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(true)
   const [account, setAccount] = useState('')
-  const [error, setError] = useState('')
+  const [decentagram, setDecentagram] = useState(null)
+  const [images, setImages] = useState([])
+  const [imageCount, setImageCount] = useState(0)
+
+  const loadWeb3 = async () => {
+    if (window.ethereum) {
+      window.web3 = new Web3(window.ethereum)
+      await window.ethereum.enable()
+    } else if (window.web3) {
+      window.web3 = new Web3(window.web3.currentProvider)
+    } else {
+      window.alert(
+        'Non-Ethereum browser detected. You should consider trying MetaMask!'
+      )
+    }
+  }
 
   const loadBlockchainData = async () => {
-    if (window.ethereum) {
-      try {
-        const accounts = await window.ethereum.request({
-          method: 'eth_requestAccounts',
-        })
-        setAccount(accounts[0])
-      } catch (error) {
-        if (error.code === 4001) {
-          // User rejected request
-        }
-
-        // if not pending then something else wrong
-        if (error.code !== -32002) {
-          setError(error)
-          alert(error.message)
-        }
-      }
+    const web3 = window.web3
+    // Load account
+    const accounts = await web3.eth.getAccounts()
+    setAccount(accounts[0])
+    // Network ID
+    const networkId = await web3.eth.net.getId()
+    const networkData = Decentagram.networks[networkId]
+    if (networkData) {
+      const decentagram = new web3.eth.Contract(
+        Decentagram.abi,
+        networkData.address
+      )
+      setDecentagram(decentagram)
+      const imageCount = await decentagram.methods.imageCount().call()
+      setImageCount(imageCount)
+      setLoading(false)
+    } else {
+      window.alert('Decentagram contract not deployed to detected network')
     }
   }
 
   useEffect(() => {
+    loadWeb3()
     loadBlockchainData()
   }, [])
 
