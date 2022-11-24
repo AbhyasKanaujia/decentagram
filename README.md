@@ -26,10 +26,11 @@ This project is being done according to [a tutorial by dapp university](https://
 1. `npx create-react-app .`
 2. `truffle init`
 3. Configure _truffle-config.js_
-4. Install required packages: 
-    1. `npm i bootstrap react-bootstrap identicon.js`
-    2. `npm i chai chai-as-promised chai-bignumber`
-    3. `npm i ipfs-http-client`
-    4. `npm i truffle web3`
-    5. `npm i -D gh-pages`
-5. Add _Migration.sol_ and _1\_initial\_migration.js_
+4. Install required packages:
+   1. `npm i bootstrap react-bootstrap identicon.js`
+   2. `npm i chai chai-as-promised chai-bignumber`
+   3. `npm i ipfs-http-client`
+   4. `npm i truffle web3`
+   5. `npm i -D gh-pages`
+5. Add _Migration.sol_ and _1_initial_migration.js_
+6. Cleanup unnecessary files from react project
