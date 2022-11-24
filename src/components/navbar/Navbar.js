@@ -1,6 +1,6 @@
 import './navbar.css'
 
-import Identicon from 'identicon.js'
+import Jazzicon, { jsNumberForAddress } from 'react-jazzicon'
 
 import BsNavbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
@@ -17,14 +17,7 @@ const Navbar = ({ account }) => {
           <Nav className="ms-auto text-secondary small d-flex align-items-center">
             <small className="mx-1">{account}</small>
             {account && (
-              <img
-                width="30"
-                height="30"
-                src={`data:image/png;base64,${new Identicon(
-                  account || `0x0`,
-                  30
-                ).toString()}`}
-              />
+              <Jazzicon diameter={30} seed={jsNumberForAddress(account)} />
             )}
           </Nav>
         </BsNavbar.Collapse>
